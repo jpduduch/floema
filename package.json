@@ -1,0 +1,58 @@
+{
+  "name": "floema",
+  "version": "1.0.0",
+  "scripts": {
+    "b:build": "node app.js",
+    "b:dev": "nodemon app.js",
+    "f:build": "webpack --progress --config webpack.config.build.js",
+    "f:dev": "webpack serve --progress --config webpack.config.development.js",
+    "start": "concurrently --kill-others \"npm run b:dev\" \"npm run f:dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpduduch/floema.git"
+  },
+  "author": "João Duduch",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "copy-webpack-plugin": "^9.0.0",
+    "css-loader": "^5.2.6",
+    "eslint": "^7.28.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "file-loader": "^6.2.0",
+    "glslify-loader": "^2.0.0",
+    "image-minimizer-webpack-plugin": "^2.2.0",
+    "imagemin": "^8.0.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "mini-css-extract-plugin": "^1.6.0",
+    "path": "^0.12.7",
+    "postcss-loader": "^5.3.0",
+    "raw-loader": "^4.0.2",
+    "sass": "^1.34.1",
+    "sass-loader": "^12.0.0",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  },
+  "dependencies": {
+    "@prismicio/client": "^5.0.0",
+    "concurrently": "^6.2.0",
+    "dotenv": "^10.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "prismic-dom": "^2.2.5",
+    "pug": "^3.0.2"
+  }
+}
