@@ -41,7 +41,7 @@ module.exports = {
     }),
 
     // new Webpack.ProvidePlugin({
-    // 	// uma forma de importar libraries para seu projeto. só incluir aqui dentro que já era. o lado ruim é que pode começar a deixar seu projeto pesado se vc perder o controle
+    // // uma forma de importar libraries para seu projeto. só incluir aqui dentro que já era. o lado ruim é que pode começar a deixar seu projeto pesado se vc perder o controle
     // }),
 
     new CopyWebpackPlugin({
