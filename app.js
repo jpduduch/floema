@@ -1,4 +1,5 @@
-//.env permite puxar variáveis de um arquivo .env para o arquivo onde a função abaixo é utilizada. Serve para evitar subir chaves APIs em repositórios e causar vulnerabilidades de segurança
+/* eslint-disable no-tabs */
+// .env permite puxar variáveis de um arquivo .env para o arquivo onde a função abaixo é utilizada. Serve para evitar subir chaves APIs em repositórios e causar vulnerabilidades de segurança
 require('dotenv').config()
 
 // documentação do CRM Prismic disponível em: https://prismic.io/docs/technologies/integrating-with-an-existing-project-nodejs
@@ -58,29 +59,25 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', async (req, res) => {
-
-  initApi(req).then(api => {
-  	// o programa vai pegar todo o conteúdo que tenha o match abaixo: documentos com o type 'about' do Prismic
+  initApi(req).then(api => { // o programa vai pegar todo o conteúdo que tenha o match abaixo: documentos com o type 'about' do Prismic
     api.query(
       Prismic.Predicates.at('document.type', 'about')
     )
     // aí ele pega tudo o que achou e manda para o caminho do método render, ou seja, a pages/about
-    .then(response => {
+      .then(response => {
+        const { results } = response
+        const [about] = results
 
-    	const { results } = response
-    	const [about] = results
+        about.data.gallery.forEach(media => {
+          console.log(media)
+        })
 
-    	about.data.gallery.forEach(media => {
-    		console.log(media)
-    	})
+        console.log(about)
 
-      console.log(about)
-
-      res.render('pages/about', {
-      	about
+        res.render('pages/about', {
+          about
+        })
       })
-    })
-
   })
 })
 

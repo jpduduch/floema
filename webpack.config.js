@@ -4,14 +4,18 @@ const Webpack = require('webpack')
 /* Webpack é um compilador que consegue juntar todos os arquivos src como .sass e .js e gerar os outputs a serem lidos pelo browser */
 
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') /* Puxa todos os estilos css de um js e compila num arquivo css, evitando o problema css in js */
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'dev'
 
 const dirApp = path.join(__dirname, 'app')
+const dirImages = path.join(__dirname, 'images')
 const dirShared = path.join(__dirname, 'shared')
 const dirStyles = path.join(__dirname, 'styles')
+const dirVideos = path.join(__dirname, 'videos')
 const dirNode = 'node_modules'
 
 /* estas 3 linhas de código são as pastas onde estarão os arquivos do projeto */
@@ -29,8 +33,10 @@ module.exports = {
   resolve: {
     modules: [
       dirApp,
+      dirImages,
       dirShared,
       dirStyles,
+      dirVideos,
       dirNode
     ]
   },
@@ -39,6 +45,8 @@ module.exports = {
     new Webpack.DefinePlugin({
       IS_DEVELOPMENT
     }),
+
+    new CleanWebpackPlugin(),
 
     // new Webpack.ProvidePlugin({
     // // uma forma de importar libraries para seu projeto. só incluir aqui dentro que já era. o lado ruim é que pode começar a deixar seu projeto pesado se vc perder o controle
@@ -82,8 +90,8 @@ module.exports = {
         test: /\.scss$/,
         use: [
           { loader: MiniCssExtractPlugin.loader, options: { publicPath: '' } },
-          { loader: 'css-loader' },
-          { loader: 'postcss-loader' },
+          { loader: 'css-loader' }, // extrai css de js e coloca no código final
+          { loader: 'postcss-loader' }, // converte automaticamente css não compatível com navegadores antigos -ex.: quando algumas propriedades precisam vir com o -webkit- ou o -moz- -
           { loader: 'sass-loader' }
         ]
       },
