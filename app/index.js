@@ -1,3 +1,4 @@
-// import placeholder from 'images/placeholder.jpg'
+import jubaBhai from 'images/jubabhai.jpeg'
+import yeezy from 'images/20.webp'
 
-console.log('placeholder');
+console.log(jubaBhai, yeezy)
