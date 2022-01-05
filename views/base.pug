@@ -2,13 +2,13 @@ block variables
 doctype html
 html(lang="en")
   head
-    include head
+    include partials/head
   body
-    include preloader
-    include navigation
+    include partials/preloader
+    include partials/navigation
 
     #content.content(data-template=template)
     block content
       span no content provided
 
-    include scripts
+    include partials/scripts
