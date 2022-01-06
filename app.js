@@ -1,10 +1,20 @@
 require('dotenv').config()
 
-const path = require('path')
 const express = require('express')
-const errorHandlers = require('errorhandler')
+const errorHandler = require('errorhandler')
+const logger = require('morgan')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
+
 const app = express()
+const path = require('path')
 const port = 8004
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(errorHandler())
+app.use(logger('dev'))
+app.use(methodOverride())
 
 const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom')
@@ -23,68 +33,113 @@ const initApi = req => {
 // step 5: adding a link resolver. Ref: Luis Bizarro video 'Integrating Prismic with your project: 1h05m39s
 
 const handleLinkResolver = doc => {
-  // no code for now since we're doing this manually
+  if (doc.type === 'product') {
+    return `/detail/${doc.slug}`
+  }
+
+  if (doc.type === 'about') {
+    return '/about'
+  }
+
+  if (doc.type === 'collections') {
+    return '/collections'
+  }
+  console.log(doc)
   return '/'
 }
-
-app.use(errorHandlers())
 
 // step 6: create a middleware to add the prismic context.  Ref: Luis Bizarro video 'Integrating Prismic with your project: 1h07m00s
 
 app.use((req, res, next) => {
-  res.locals.ctx = {
-    endpoint: process.env.PRISMIC_ENDPOINT,
-    linkResolver: handleLinkResolver
-  }
+  res.locals.Link = handleLinkResolver
+
   // add PrismicDOM in locals to access them in templates.
   res.locals.PrismicDOM = PrismicDOM
+
+  // workaroud for the collections numbers
+  res.locals.Numbers = index => {
+    return index === 0 ? 'One' : index === 1 ? 'Two' : index === 2 ? 'Three' : index === 3 ? 'Four' : ''
+  }
 
   next()
 })
 
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
-app.locals.basedir = app.get('views')
+
+const handleRequest = async api => {
+  const meta = await api.getSingle('meta')
+  const navigation = await api.getSingle('navigation')
+  const preloader = await api.getSingle('preloader')
+
+  return {
+    meta,
+    navigation,
+    preloader
+  }
+}
 
 // step 8: add queries to your routes. Ref: Luis Bizarro video 'Integrating Prismic with your project: 1h09m50s (it should be added on each route of express.js below)
 
 app.get('/', async (req, res) => {
-  res.render('pages/home')
+  const api = await initApi(req)
+
+  const defaults = await handleRequest(api)
+  const home = await api.getSingle('home')
+
+  res.render('pages/home', {
+    ...defaults,
+    api,
+    home
+  })
 })
 
 app.get('/about', async (req, res) => {
   const api = await initApi(req)
-  const meta = await api.getSingle('meta')
+
+  const defaults = await handleRequest(api)
   const about = await api.getSingle('about')
 
-  // response is the response object. Render your views here
-  // res.render('pages/about', {
-  //   document: response.results[0]
-  // })
-
   res.render('pages/about', {
-    about,
-    meta
+    ...defaults,
+    about
   })
 })
 
 app.get('/detail/:uid', async (req, res) => {
   const api = await initApi(req)
-  const meta = await api.getSingle('meta')
+  const defaults = await handleRequest(api)
   const product = await api.getByUID('product', req.params.uid, {
     fetchLinks: 'collection.title'
   })
 
-  console.log('product ', product)
-
   res.render('pages/detail', {
-    meta,
+    ...defaults,
     product
   })
 })
 
-app.get('/collections', (req, res) => {
-  res.render('pages/collections')
+app.get('/collections', async (req, res) => {
+  const api = await initApi(req)
+
+  const defaults = await handleRequest(api)
+  const home = await api.getSingle('home')
+  const { results: collections } = await api.query(
+    Prismic.Predicates.at('document.type', 'collection'),
+    { fetchLinks: 'product.image' }
+  )
+
+  console.log(collections)
+
+  collections.forEach(collection => {
+    console.log(collection.data.products[0].products_product)
+  })
+
+  res.render('pages/collections', {
+    ...defaults,
+    home,
+    collections
+  })
 })
 
 app.listen(port, () => {
