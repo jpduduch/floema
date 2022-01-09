@@ -1,9 +1,24 @@
+*, *:after, *:before {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: calc(100vw / 2000 * 10);
+    //cálculo para que o tamanho do texto acompanhe a largura da tela
+}
+
 body {
-    font-size: 16px;
+    @extend %description-16;
     font-family: $font-suisse-bp;
     font-weight: 300;
+}
 
-    @include media('<phone') {
-        font-size: 100px;
-    }
+a {
+    color: inherit;
+    outline: none;
+    text-decoration: none;
+}
+
+img {
+    vertical-align: middle;
 }

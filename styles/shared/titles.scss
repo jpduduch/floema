@@ -4,6 +4,11 @@
         font-size: 2rem;
     }
 
+    &-30 {
+        font-family: $font-george-x;
+        font-size: 3rem;
+    }
+
     &-53 {
         font-size: 5.3rem;
         font-family: $font-george-x;
@@ -22,6 +27,7 @@
     &-120 {
         font-family: $font-george-x;
         font-size: 12rem;
+        line-height: 0.82;
     }
 
     &-200 {

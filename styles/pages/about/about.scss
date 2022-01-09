@@ -1,4 +1,6 @@
 .about {
+    background: $color-cadet-blue;
+    color: $color-deep-purple;
 
 }
 
@@ -7,5 +9,9 @@
 }
 
 .about__title {
-
+    @extend %title-100;
+    line-height: 1;
+    width: 130rem;
+    text-align: center;
+    margin: auto;
 }
