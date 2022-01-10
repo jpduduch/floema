@@ -24,8 +24,8 @@ block content
 
                 .about__content__description!=PrismicDOM.RichText.asHtml(section.primary.description)
 
-                figure.about__content__media__image
-                  img(alt=section.primary.image.alt src=section.primary.image.url)
+              figure.about__content__media
+                img.about__content__media__image(alt=section.primary.image.alt src=section.primary.image.url)
         
         if section.slice_type == 'highlight'
           section.about__highlight

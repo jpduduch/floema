@@ -11,6 +11,10 @@
     &:last-child {
         margin-bottom: 0;
     }
+
+    &:nth-child(5) & {
+        justify-content: flex-end;
+    }
 }
 
 .about__content__wrapper {
@@ -26,16 +30,43 @@
 }
 
 .about__content__label {
+    @extend %description-12;
+
     width: 18rem;
+    text-transform: uppercase;
 }
 
 .about__content__description {
-    width: 37rem;
+    width: 36.2rem;
+
+    p:not(:first-child) {
+        margin-top: 1.6rem;
+    }
 }
 
 .about__content__media {
+    position: relative;
+
+    .about__content:nth-child(3) & {
+        margin-left: 18rem;
+        height: 80.8rem;
+        width: 53.8rem;
+    }
+
+    .about__content:nth-child(5) & {
+        height: 60rem;
+        margin-left: 18rem;
+        width: 96rem;
+    }
+
+    .about__content:nth-child(8) & {
+        height: 52rem;
+        margin-left: 84.2rem;
+        margin-right: 12rem;
+    }
 }
 
 .about__content__media__image {
-
+    @extend %cover;
+    object-fit: cover;
 }
