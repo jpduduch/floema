@@ -130,8 +130,6 @@ app.get('/collections', async (req, res) => {
     { fetchLinks: 'product.image' }
   )
 
-  console.log(collections)
-
   collections.forEach(collection => {
     console.log(collection.data.products[0].products_product)
   })

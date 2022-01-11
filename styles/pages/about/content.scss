@@ -12,8 +12,12 @@
         margin-bottom: 0;
     }
 
-    &:nth-child(5) & {
+    &:nth-child(5) {
         justify-content: flex-end;
+    }
+
+    &:nth-child(8) {
+        justify-content: flex-start !important;
     }
 }
 
@@ -61,8 +65,16 @@
 
     .about__content:nth-child(8) & {
         height: 52rem;
-        margin-left: 84.2rem;
+        // margin-left: 84.2rem;
         margin-right: 12rem;
+        width: 84.2rem;
+    }
+
+    .about__content:nth-child(9) & {
+        height: 85.8rem;
+        // margin-left: 84.2rem;
+        margin-left: 24rem;
+        width: 60.8rem;
     }
 }
 
