@@ -87,11 +87,19 @@ app.get('/', async (req, res) => {
 
   const defaults = await handleRequest(api)
   const home = await api.getSingle('home')
+  const { results: collections } = await api.query(
+    Prismic.Predicates.at('document.type', 'collection'),
+    { fetchLinks: 'product.image' }
+  )
+
+  console.log('home ', home)
+  console.log('collections.results ', collections)
 
   res.render('pages/home', {
     ...defaults,
     api,
-    home
+    home,
+    collections
   })
 })
 
