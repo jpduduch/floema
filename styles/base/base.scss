@@ -4,6 +4,7 @@
 
 html {
     font-size: calc(100vw / 2000 * 10);
+    line-height: 1;
     //cálculo para que o tamanho do texto acompanhe a largura da tela
 }
 
@@ -21,4 +22,14 @@ a {
 
 img {
     vertical-align: middle;
+}
+
+//reset button
+
+button {
+    background: none;
+    border: none;
+    color: inherit;
+    outline: none;
+    cursor: pointer;
 }

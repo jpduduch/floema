@@ -18,8 +18,9 @@ block content
           .detail__information__highlights
             each highlight in product.data.highlights
               p.detail__information__highlight
-                svg.detail__information__highlight__icon
-                  use(xlink:href=`sprite-${highlight.highlights_icon.toLowerCase()}`)
+                svg.detail__information__highlight__icon(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.51 20.51")
+                  //- path(fill="currentColor" d="M20.51,0l-.66,2.36L19.8,5,17.87,2.64,15.56.71l2.59,0ZM0,20.51l.66-2.36,0-2.59,1.93,2.31L5,19.8l-2.59.05Zm4.6-4.6L15.91,4.6")
+                  //- use(xlink:href=`sprite-${highlight.highlights_icon.toLowerCase()}`)
 
                 span.detail__information__highlight__text!=highlight.highlights_text.replace(/\n/, '<br>')
           
@@ -30,3 +31,7 @@ block content
                 span.detail__information__item__description=item.informations_description
         
           a.detail__information__link(href=product.data.link_url.url target="_blank")=product.data.link_text
+    
+    button.detail__button Close
+      svg.detail__button__icon(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 60")
+        path(fill="none" stroke="currentColor" d="M62,0c34.24,0,62,13.43,62,30S96.24,60,62,60,0,46.57,0,30,27.76,0,62,0Zm0,.5c34,0,61.5,13.21,61.5,29.5S96,59.5,62,59.5.5,46.29.5,30,28,.5,62,.5Z")

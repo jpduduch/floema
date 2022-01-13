@@ -3,14 +3,15 @@
     @extend %center;
     background: $color-contessa;
     color: $color-quarter-spanish-white;
-    display: flex;
     display: none;
     text-align: center;
+    z-index: z('preloader');
 }
 
 .preloader__text{
     @extend %title-53;
-    max-width: 66rem;
+    line-height: 1;
+    max-width: 90rem;
 }
 
 .preloader__number{
