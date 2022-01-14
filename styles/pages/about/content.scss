@@ -4,6 +4,7 @@
     margin: 20rem auto;
     position: relative;
 
+
     &:first-child {
         margin-top: 0;
     }
@@ -19,6 +20,17 @@
     &:nth-child(8) {
         justify-content: flex-start !important;
     }
+
+    @include media('<=phone'){
+        &:nth-child(5) {
+            justify-content: flex-end;
+        }
+
+        &:nth-child(8) {
+            justify-content: flex-start !important;
+        }
+    }
+
 }
 
 .about__content__wrapper {
@@ -27,10 +39,24 @@
     .about__content--right & {
         flex-direction: row-reverse;
     }
+
+    @include media('<=phone') {
+        .about__content:nth-child(3) & {
+            flex-direction: column-reverse;
+        }
+    }
 }
 
 .about__content__box {
     display: flex;
+
+    @include media('<=phone'){
+        width: 60.9rem;
+
+        .about__content:nth-child(3) & {
+            margin-top: 10rem;
+        }
+    }
 }
 
 .about__content__label {
@@ -45,6 +71,11 @@
 
     p:not(:first-child) {
         margin-top: 1.6rem;
+    }
+
+    @include media('<=phone'){
+        padding-left: 3.2rem;
+        width: 100%;
     }
 }
 
@@ -75,6 +106,14 @@
         // margin-left: 84.2rem;
         margin-left: 24rem;
         width: 60.8rem;
+    }
+
+    @include media('<=phone'){
+        .about__content:nth-child(3) & {
+            height: 91.4rem;
+            margin-left: 0;
+            width: 100%;
+        }
     }
 }
 

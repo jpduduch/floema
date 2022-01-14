@@ -92,9 +92,6 @@ app.get('/', async (req, res) => {
     { fetchLinks: 'product.image' }
   )
 
-  console.log('home ', home)
-  console.log('collections.results ', collections)
-
   res.render('pages/home', {
     ...defaults,
     api,
@@ -122,6 +119,8 @@ app.get('/detail/:uid', async (req, res) => {
     fetchLinks: 'collection.title'
   })
 
+  console.log(product.data.highlights[1].highlights_icon)
+
   res.render('pages/detail', {
     ...defaults,
     product
@@ -137,10 +136,6 @@ app.get('/collections', async (req, res) => {
     Prismic.Predicates.at('document.type', 'collection'),
     { fetchLinks: 'product.image' }
   )
-
-  collections.forEach(collection => {
-    console.log(collection.data.products[0].products_product)
-  })
 
   res.render('pages/collections', {
     ...defaults,

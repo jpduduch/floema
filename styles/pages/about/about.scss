@@ -14,4 +14,8 @@
     width: 130rem;
     text-align: center;
     margin: auto;
+
+    @include media('<=phone'){
+        max-width: 70rem;
+    }
 }
