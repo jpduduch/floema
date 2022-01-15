@@ -30,6 +30,17 @@
             width: 100%;
         }
     }
+
+    &:last-child {
+        @include media('<=phone') {
+            height: 334.9rem;
+
+            .about__highlights__media & {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
 }
 
 .about__highlight__label {
@@ -42,6 +53,11 @@
     width: 9.6rem;
     text-align: center;
     letter-spacing: 0.1rem;
+
+    @include media('<=phone') {
+        top: 87.3rem;
+        width: 25rem;
+    }
 
 }
 
@@ -80,6 +96,10 @@
     &:last-child {
         bottom: 0;
         right: 0;
+
+        @include media('<=phone') {
+            bottom: 18.7rem;
+        }
     }
 }
 
