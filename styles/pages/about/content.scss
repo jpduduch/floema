@@ -36,13 +36,32 @@
 .about__content__wrapper {
     display: flex;
 
+    .about__content--left & {
+        @include media('<=phone') {
+            flex-direction: column-reverse;
+        }
+    }
+
     .about__content--right & {
         flex-direction: row-reverse;
+
+        @include media('<=phone') {
+            flex-direction: column-reverse;
+
+             &.about__content__media {
+                width: 100%;
+            }
+        }
     }
 
     @include media('<=phone') {
+        width: 100%;
         .about__content:nth-child(3) & {
             flex-direction: column-reverse;
+        }
+
+        .about__content:nth-child(5) & {
+            flex-direction: column;
         }
     }
 }
@@ -51,10 +70,11 @@
     display: flex;
 
     @include media('<=phone'){
-        width: 60.9rem;
+        padding: 7.3rem;
+        width: 75rem;
 
         .about__content:nth-child(3) & {
-            margin-top: 10rem;
+            margin-top: 0;
         }
     }
 }
@@ -64,6 +84,11 @@
 
     width: 18rem;
     text-transform: uppercase;
+
+    @include media ('<=phone') {
+        width: 13.5rem;
+        word-wrap: break-word;
+    }
 }
 
 .about__content__description {
@@ -99,20 +124,35 @@
         // margin-left: 84.2rem;
         margin-right: 12rem;
         width: 84.2rem;
+
+        @include media('<=phone') { width: 75rem; }
     }
 
     .about__content:nth-child(9) & {
         height: 85.8rem;
-        // margin-left: 84.2rem;
         margin-left: 24rem;
         width: 60.8rem;
+
+        @include media('<=phone'){
+            margin-left: 0;
+            justify-content: center;
+            width: 60.8rem;
+            margin: 0 7.1rem;
+        }
     }
 
     @include media('<=phone'){
         .about__content:nth-child(3) & {
             height: 91.4rem;
+            margin: auto;
+            
+        }
+
+        .about__content:nth-child(5) & {
+            height: 50rem;
             margin-left: 0;
-            width: 100%;
+            padding: 8rem;
+            width: 75rem;
         }
     }
 }
@@ -120,4 +160,5 @@
 .about__content__media__image {
     @extend %cover;
     object-fit: cover;
+    height: auto;
 }
