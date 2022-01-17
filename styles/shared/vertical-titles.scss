@@ -13,6 +13,10 @@
     transform: rotate(90deg);
     text-align: center;
     margin: 0 3rem;
+
+    @include media('<=phone') {
+        font-size: 1.2rem !important;
+    }
 }
 
 %vertical-titles__title {

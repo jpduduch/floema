@@ -55,7 +55,7 @@
     letter-spacing: 0.1rem;
 
     @include media('<=phone') {
-        top: 87.3rem;
+        top: 96rem;
         width: 25rem;
     }
 
@@ -106,4 +106,13 @@
 .about__highlights__media__image {
     @extend %cover;
     object-fit: cover;
+}
+
+.about__highlight:last-child {
+    .about__highlights__media {
+        @include media('<=phone') {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
 }

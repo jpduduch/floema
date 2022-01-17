@@ -25,3 +25,9 @@ block content
             h2.collections__article__title=`${collection.data.title} ${home.data.collection}`
             p.collections__article__description!=collection.data.description.replace(/\n/, '<br>')
 
+      .collections__mobile
+        each collection, index in collections 
+          .collections__mobile__item
+            .collections__mobile__item__label!=`${home.data.collection} <br> ${Numbers(index)}`
+            .collections__mobile__item__title=collection.data.title
+
