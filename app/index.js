@@ -5,7 +5,6 @@ import Home from 'pages/Home'
 
 class App {
   constructor () {
-    // console.log('App')
     this.createContent()
     this.createPages()
   }
@@ -22,10 +21,10 @@ class App {
       about: new About(),
       collections: new Collections(),
       detail: new Detail(),
-      home: new Home()
+      home: new Home(),
     }
-    this.page = this.pages[this.template]
-    // console.log(this.pages)
+
+    console.log(this.pages)
   }
 }
 
